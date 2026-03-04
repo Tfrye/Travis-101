@@ -1,0 +1,780 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Travis 101&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&amp;family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>*{box-sizing:border-box;margin:0;padding:0}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>html,body,#root{width:100%;height:100%;overflow:hidden}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>button{font-family:inherit}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>::-webkit-scrollbar{width:3px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>::-webkit-scrollbar-track{background:transparent}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>::-webkit-scrollbar-thumb{background:rgba(245,240,232,0.13);border-radius:3px}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>@keyframes floatBounce{0%,100%{transform:translateY(0) scale(1)}33%{transform:translateY(-12px) scale(1.03)}66%{transform:translateY(6px) scale(0.97)}}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>@keyframes sparkle{0%,100%{opacity:0;transform:scale(0) rotate(0deg)}50%{opacity:1;transform:scale(1) rotate(180deg)}}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>@keyframes slideUpBounce{0%{opacity:0;transform:translateY(60px) scale(0.9)}60%{opacity:1;transform:translateY(-8px) scale(1.02)}100%{opacity:1;transform:translateY(0) scale(1)}}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>@keyframes pulse{0%,100%{box-shadow:0 4px 30px rgba(45,109,181,0.27)}50%{box-shadow:0 4px 40px rgba(45,109,181,0.53)}}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>@keyframes popIn{0%{opacity:0;transform:scale(0.9) translateY(10px)}60%{opacity:1;transform:scale(1.02) translateY(-2px)}100%{opacity:1;transform:scale(1) translateY(0)}}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>@keyframes wiggle{0%,100%{transform:rotate(0deg)}25%{transform:rotate(-3deg)}75%{transform:rotate(3deg)}}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>@keyframes fadeIn{from{opacity:0}to{opacity:1}}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1">&lt;div id="root"&gt;&lt;/div&gt;</p>
+<p class="p1">&lt;script type="text/babel"&gt;</p>
+<p class="p1">const { useState, useEffect, useCallback, useRef } = React;</p>
+<p class="p2"><br></p>
+<p class="p1">const P = {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>navy:"#0F1F3D", navyLight:"#1A2E52", blue:"#1B4F8A", blueLight:"#2D6DB5",</p>
+<p class="p1"><span class="Apple-converted-space">  </span>teal:"#0E6B74", tealLight:"#1A8C97", gold:"#C8922A", goldLight:"#E8B84B",</p>
+<p class="p1"><span class="Apple-converted-space">  </span>sage:"#4A7C59", sageLight:"#6BA07A", warm:"#8B5E3C", warmLight:"#B07E55",</p>
+<p class="p1"><span class="Apple-converted-space">  </span>cream:"#F5F0E8", creamDark:"#E8DFD2", coral:"#C0533E", white:"#FEFCF9",</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const FloatingOrb = ({ size, color, top, left, delay, duration=6 }) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div style={{ position:"absolute", width:size, height:size, borderRadius:"50%",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background:`radial-gradient(circle at 30% 30%, ${color}66, ${color}18)`,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>top, left, animation:`floatBounce ${duration}s ease-in-out ${delay}s infinite`,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>pointerEvents:"none", filter:"blur(1px)" }} /&gt;</p>
+<p class="p1">);</p>
+<p class="p1">const Sparkle = ({ top, left, delay, size=8 }) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div style={{ position:"absolute", top, left, width:size, height:size,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>animation:`sparkle 2.8s ease-in-out ${delay}s infinite`, pointerEvents:"none" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;svg viewBox="0 0 20 20" width={size} height={size}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill={P.goldLight}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">);</p>
+<p class="p1">const ProgressDots = ({ current, total, onNav }) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div style={{ display:"flex", gap:6, justifyContent:"center", padding:"10px 0 6px" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{Array.from({length:total}).map((_,i) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button key={i} onClick={()=&gt;onNav(i)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>style={{ width:i===current?24:8, height:8, borderRadius:4, border:"none",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>background:i===current?P.goldLight:`${P.cream}33`, cursor:"pointer",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>transition:"all 0.4s cubic-bezier(0.34,1.56,0.64,1)" }} /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">);</p>
+<p class="p1">const Screen = ({ children, isActive, bg }) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div style={{ position:"absolute", inset:0,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background:bg||`linear-gradient(160deg,${P.navy} 0%,${P.navyLight} 50%,${P.blue}88 100%)`,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opacity:isActive?1:0, transform:isActive?"scale(1)":"scale(0.96)",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition:"opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1)",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>pointerEvents:isActive?"auto":"none", overflow:"hidden", display:"flex", flexDirection:"column" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">);</p>
+<p class="p1">const ScrollArea = ({ children, style }) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div style={{ flex:1, overflowY:"auto", overflowX:"hidden",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>WebkitOverflowScrolling:"touch", paddingBottom:56, ...style }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">);</p>
+<p class="p1">const Badge = ({ label, color }) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;span style={{ fontFamily:"'DM Sans',sans-serif", fontSize:9, fontWeight:700,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color, background:`${color}22`, padding:"2px 9px", borderRadius:50,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letterSpacing:"0.04em", flexShrink:0 }}&gt;{label}&lt;/span&gt;</p>
+<p class="p1">);</p>
+<p class="p2"><br></p>
+<p class="p1">const CoverScreen = ({ isActive, onStart }) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [showTag, setShowTag] = useState(false);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [showCTA, setShowCTA] = useState(false);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (!isActive) return;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setShowTag(false); setShowCTA(false);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const t1=setTimeout(()=&gt;setShowTag(true),800);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const t2=setTimeout(()=&gt;setShowCTA(true),1600);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return()=&gt;{clearTimeout(t1);clearTimeout(t2);};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}, [isActive]);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;Screen isActive={isActive}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;FloatingOrb size={180} color={P.blueLight} top="-40px" left="-50px" delay={0} duration={8}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;FloatingOrb size={120} color={P.gold} top="58%" left="72%" delay={1} duration={7}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;FloatingOrb size={90} color={P.sage} top="28%" left="82%" delay={2} duration={9}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;FloatingOrb size={140} color={P.teal} top="72%" left="-20px" delay={0.5} duration={6}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Sparkle top="15%" left="68%" delay={0} size={12}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Sparkle top="38%" left="18%" delay={0.8} size={8}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Sparkle top="62%" left="58%" delay={1.6} size={10}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Sparkle top="24%" left="44%" delay={2.2} size={6}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Sparkle top="78%" left="34%" delay={0.4} size={9}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style={{ flex:1, display:"flex", flexDirection:"column", justifyContent:"center",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>alignItems:"center", padding:"32px 20px", position:"relative", zIndex:10 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ fontFamily:"'Playfair Display',Georgia,serif",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>fontSize:"clamp(60px,15vw,150px)", fontWeight:300, color:P.cream,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>letterSpacing:"-0.03em", lineHeight:0.9, textAlign:"center",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>animation:isActive?"slideUpBounce 1s cubic-bezier(0.34,1.56,0.64,1) forwards":"none" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>Travis</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:"clamp(12px,2.8vw,17px)",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>color:P.goldLight, letterSpacing:"0.1em", textTransform:"uppercase", marginTop:20,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>opacity:showTag?1:0, transform:showTag?"translateY(0)":"translateY(20px)",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>transition:"all 0.8s cubic-bezier(0.34,1.56,0.64,1)", textAlign:"center", maxWidth:340 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>Fact Finder. Follow-Thru. Supporter.&lt;br/&gt;A field guide to working with Travis.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onClick={onStart} style={{ marginTop:40, padding:"14px 40px",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>background:`linear-gradient(135deg,${P.blueLight},${P.teal})`,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>border:"none", borderRadius:50, color:P.white,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>fontFamily:"'DM Sans',sans-serif", fontSize:16, fontWeight:600,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>letterSpacing:"0.06em", cursor:"pointer",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>opacity:showCTA?1:0, transform:showCTA?"translateY(0) scale(1)":"translateY(20px) scale(0.9)",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>transition:"all 0.6s cubic-bezier(0.34,1.56,0.64,1)",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>animation:showCTA?"pulse 2.5s ease-in-out infinite":"none",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>boxShadow:`0 4px 30px ${P.blueLight}55` }}&gt;Begin →&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:11, color:`${P.cream}77`,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>marginTop:14, opacity:showCTA?1:0, transition:"opacity 0.6s ease 0.3s",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>letterSpacing:"0.08em" }}&gt;3 min read · swipe to navigate&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:11, color:`${P.cream}44`,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>marginTop:18, opacity:showCTA?1:0, transition:"opacity 0.6s ease 0.5s",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>textAlign:"center", lineHeight:1.6, maxWidth:300 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>Built on &lt;span style={{ color:P.goldLight }}&gt;KOLBE A™ Index&lt;/span&gt; + &lt;span style={{ color:P.goldLight }}&gt;DISC&lt;/span&gt; —</p>
+<p class="p1"><span class="Apple-converted-space">          </span>two frameworks that map how Travis takes action and how he engages people.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/Screen&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const KolbeScreen = ({ isActive }) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [active, setActive] = useState(null);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [entered, setEntered] = useState(false);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (isActive){const t=setTimeout(()=&gt;setEntered(true),300);return()=&gt;clearTimeout(t);}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setEntered(false);setActive(null);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}, [isActive]);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const modes = [</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ id:"ff", label:"Fact Finder", score:7, color:P.blueLight, zone:"Accommodate",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>bar:"Researches deeply before committing. Needs the full picture — background, nuance, edge cases — before moving forward.",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>detail:"A 7 means Travis uses thorough research as a primary action strategy. He doesn't skim the surface — he builds comprehensive understanding. In product ops this is a superpower: his dashboards, process docs, and roadmap work are trusted because he did the homework others skipped." },</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ id:"ft", label:"Follow Thru", score:8, color:P.teal, zone:"Initiate",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>bar:"His strongest mode. Travis builds systems, creates structure, and follows through on every commitment — even when nobody's watching.",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>detail:"An 8 is his signature. He doesn't just say he'll do something — he builds a system around it. Templates, trackers, documented processes, reliable deadlines. Teams feel the difference when he's in the room and when he isn't." },</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ id:"qs", label:"Quick Start", score:2, color:P.warm, zone:"Prevent",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>bar:"He resists jumping in without a plan. Impulsive action feels risky, not exciting. He needs to think before committing.",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>detail:"A 2 means he prevents Quick Start risk — not a weakness, a deliberate counterbalance. He's the person who asks 'have we thought this through?' before the team charges off a cliff. The tension: others mistake his pause for hesitation. It's not — it's quality control." },</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ id:"imp", label:"Implementor", score:3, color:P.sage, zone:"Resist",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>bar:"Conceptual over physical. Travis works best with ideas, frameworks, and systems — not building things with his hands.",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>detail:"A 3 means he resists hands-on, tangible implementation. His tools are words, slide decks, spreadsheets, and conversation — not prototypes or physical builds. This aligns perfectly with product ops: he architects the process, others execute the mechanics." },</p>
+<p class="p1"><span class="Apple-converted-space">  </span>];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;Screen isActive={isActive} bg={`linear-gradient(160deg,${P.navy} 0%,${P.navyLight} 60%,${P.blue}55 100%)`}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;ScrollArea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ padding:"40px 20px 12px", position:"relative", zIndex:10 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:11, letterSpacing:"0.2em",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>textTransform:"uppercase", color:P.goldLight, marginBottom:6 }}&gt;KOLBE A™ Index&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style={{ fontFamily:"'Playfair Display',Georgia,serif",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>fontSize:"clamp(24px,5.5vw,34px)", fontWeight:400, color:P.cream, lineHeight:1.15 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>How he's wired&lt;br/&gt;&lt;span style={{ color:P.tealLight, fontStyle:"italic" }}&gt;to take action&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:13, color:`${P.cream}aa`,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>marginTop:8, lineHeight:1.5, maxWidth:400 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>KOLBE measures natural instincts — not personality, not skills.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Tap any bar to read what Travis's score actually means.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ padding:"12px 20px 16px", display:"flex", flexDirection:"column", gap:10 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{modes.map((m,i) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const isOpen=active===m.id;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;button key={m.id} onClick={()=&gt;setActive(isOpen?null:m.id)}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>style={{ textAlign:"left", background:isOpen?`${m.color}14`:`${P.cream}06`,</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>border:`1px solid ${isOpen?m.color+"44":P.cream+"0a"}`,</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>borderRadius:16, padding:"14px 16px", cursor:"pointer",</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>opacity:entered?1:0, transform:entered?"translateX(0)":"translateX(-30px)",</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>transition:`all 0.5s cubic-bezier(0.34,1.56,0.64,1) ${i*0.1}s` }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:8 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div style={{ display:"flex", alignItems:"center", gap:8, flexWrap:"wrap" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span style={{ fontSize:14, fontWeight:700, color:P.cream }}&gt;{m.label}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;Badge label={m.zone} color={m.color}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div style={{ display:"flex", alignItems:"center", gap:8, flexShrink:0 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span style={{ fontSize:22, fontWeight:300, color:m.color,</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>fontFamily:"'Playfair Display',serif" }}&gt;{m.score}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span style={{ fontSize:16, color:m.color,</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>transform:isOpen?"rotate(45deg)":"rotate(0deg)",</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>transition:"transform 0.3s cubic-bezier(0.34,1.56,0.64,1)" }}&gt;+&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div style={{ height:6, borderRadius:3, background:`${P.cream}15`, overflow:"hidden" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div style={{ height:"100%", width:entered?`${(m.score/10)*100}%`:"0%", borderRadius:3,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>background:`linear-gradient(90deg,${m.color}88,${m.color})`,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>transition:`width 1s cubic-bezier(0.34,1.56,0.64,1) ${0.3+i*0.15}s` }}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div style={{ fontSize:11, color:`${P.cream}77`, marginTop:6, lineHeight:1.5 }}&gt;{m.bar}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{isOpen &amp;&amp; (</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div style={{ animation:"popIn 0.4s cubic-bezier(0.34,1.56,0.64,1)",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>marginTop:10, paddingTop:10, borderTop:`1px solid ${P.cream}0f` }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div style={{ fontSize:12, color:`${P.cream}cc`, lineHeight:1.6 }}&gt;{m.detail}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>})}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:11, color:`${P.cream}55`,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>textAlign:"center", marginTop:4, fontStyle:"italic",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity:entered?1:0, transition:"opacity 0.6s ease 0.6s" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Scores: 1–3 Prevent · 4–6 Accommodate · 7–10 Initiate</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/ScrollArea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;FloatingOrb size={80} color={P.teal} top="14%" left="80%" delay={0} duration={7}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/Screen&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const DiscScreen = ({ isActive }) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [entered, setEntered] = useState(false);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (isActive){const t=setTimeout(()=&gt;setEntered(true),300);return()=&gt;clearTimeout(t);}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setEntered(false);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}, [isActive]);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const traits = [</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ icon:"🏔️", label:"Steady &amp; Reliable", color:P.tealLight,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>desc:"He's the anchor in the room. While others react to noise, he's processing, staying grounded, and keeping the work moving. Teams trust him because he never burns the place down." },</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ icon:"🎧", label:"Deep Listener", color:P.sageLight,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>desc:"He absorbs what others say — tone, subtext, what's NOT being said. People feel genuinely heard around Travis. This is rarer than most people realize." },</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ icon:"🤝", label:"Relationship-First", color:P.goldLight,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>desc:"He builds trust through consistency over time, not charm in the moment. His relationships are earned and they run deep. He'll go the extra mile for people he's loyal to." },</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ icon:"📐", label:"Thoughtful Executor", color:P.blueLight,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>desc:"He doesn't just do things — he does them right. Follow Thru 8 + DISC S is a rare combination: he cares deeply about both the quality of the relationship and the quality of the deliverable." },</p>
+<p class="p1"><span class="Apple-converted-space">  </span>];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;Screen isActive={isActive} bg={`linear-gradient(160deg,${P.navyLight} 0%,${P.navy} 50%,${P.teal}44 100%)`}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;ScrollArea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ padding:"40px 20px 12px", position:"relative", zIndex:10 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:11, letterSpacing:"0.2em",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>textTransform:"uppercase", color:P.goldLight, marginBottom:6 }}&gt;DISC · Supporter&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style={{ fontFamily:"'Playfair Display',Georgia,serif",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>fontSize:"clamp(24px,5.5vw,34px)", fontWeight:400, color:P.cream, lineHeight:1.15 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>The quiet engine&lt;br/&gt;&lt;span style={{ color:P.sageLight, fontStyle:"italic" }}&gt;everyone depends on&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:13, color:`${P.cream}aa`,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>marginTop:8, lineHeight:1.5, maxWidth:400 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Steady, thoughtful, accommodating. Travis isn't the loudest voice in the room —</p>
+<p class="p1"><span class="Apple-converted-space">            </span>he's the one the room would collapse without.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ padding:"8px 20px 16px", display:"flex", flexDirection:"column", gap:12 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{traits.map((t,i) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div key={t.label} style={{ background:`${P.cream}07`, border:`1px solid ${t.color}22`,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>borderRadius:18, padding:"16px", display:"flex", gap:14, alignItems:"flex-start",</p>
+<p class="p1"><span class="Apple-converted-space">              </span>opacity:entered?1:0, transform:entered?"translateX(0)":"translateX(-40px)",</p>
+<p class="p1"><span class="Apple-converted-space">              </span>transition:`all 0.6s cubic-bezier(0.34,1.56,0.64,1) ${i*0.12}s` }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div style={{ width:42, height:42, borderRadius:12, background:`${t.color}18`,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>display:"flex", alignItems:"center", justifyContent:"center", fontSize:20, flexShrink:0,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>animation:entered?`wiggle 4s ease-in-out ${i*0.4}s infinite`:"none" }}&gt;{t.icon}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div style={{ minWidth:0 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:14, fontWeight:700,</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>color:P.cream, marginBottom:5 }}&gt;{t.label}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:12,</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>color:`${P.cream}aa`, lineHeight:1.6 }}&gt;{t.desc}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:12, color:P.goldLight,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>textAlign:"center", fontStyle:"italic", marginTop:4,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity:entered?1:0, transition:"opacity 0.6s ease 0.6s" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>High FF + High FT + DISC S = does the deep work, builds the system, never drops the ball.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/ScrollArea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;FloatingOrb size={90} color={P.sage} top="15%" left="78%" delay={0} duration={8}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/Screen&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const BlindSpotsScreen = ({ isActive }) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [entered, setEntered] = useState(false);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [flipped, setFlipped] = useState(null);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (isActive){const t=setTimeout(()=&gt;setEntered(true),300);return()=&gt;clearTimeout(t);}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setEntered(false);setFlipped(null);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}, [isActive]);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const spots = [</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ icon:"🧱", label:"The Invisible Wall", source:"DISC S + Follow Thru 8", color:P.blueLight,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cost:"Travis absorbs everything and shows very little friction. Problems get internalized, frustrations go unsaid, and pressure builds behind a very composed exterior — until it doesn't.",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>antidote:"Name it before it compounds. 'I'm carrying a lot right now' is a complete sentence. People can't help with what they can't see." },</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ icon:"📚", label:"The Research Loop", source:"Fact Finder 7", color:P.gold,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cost:"He can get stuck gathering information past the point of diminishing returns. The instinct to be thorough is right — the timing can be off when speed matters more than precision.",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>antidote:"Set a 'good enough to move' threshold before starting. Ask: what does he need to know to make a 70% confident decision? Stop there." },</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ icon:"⚠️", label:"The Quiet Yes", source:"DISC S (Accommodating)", color:P.coral,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cost:"He says yes — or doesn't say no — to keep things smooth. Then he's overcommitted and under-resourced, doing great work on too many fronts and absorbing the cost personally.",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>antidote:"The pause before yes is professional, not rude. 'Let me check what I'm already carrying' is a complete response that buys him real time." },</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ icon:"🐢", label:"The Slow Ignition", source:"Quick Start 2", color:P.warm,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cost:"He's not slow — he's deliberate. But in fast-moving environments, the pause to plan can look like reluctance, especially to high Quick Starts around him.",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>antidote:"Narrate the process out loud. 'I want to make sure I understand the full picture before I commit' signals intent, not hesitation." },</p>
+<p class="p1"><span class="Apple-converted-space">  </span>];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;Screen isActive={isActive} bg={`linear-gradient(160deg,${P.navy} 0%,${P.navyLight} 100%)`}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style={{ padding:"40px 20px 10px", position:"relative", zIndex:10, flexShrink:0 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:11, letterSpacing:"0.2em",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>textTransform:"uppercase", color:P.coral, marginBottom:6 }}&gt;The Blind Spots&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ fontFamily:"'Playfair Display',Georgia,serif",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>fontSize:"clamp(24px,5.5vw,34px)", fontWeight:400, color:P.cream, lineHeight:1.15 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>Yeah, but here's&lt;br/&gt;&lt;span style={{ color:P.coral, fontStyle:"italic" }}&gt;what that costs him&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:13, color:`${P.cream}aa`,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>marginTop:8, lineHeight:1.5, maxWidth:400 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>Every strength has a shadow. These are his. Tap any card to see the antidote.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;ScrollArea style={{ padding:"8px 20px 0" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ display:"flex", flexDirection:"column", gap:10 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{spots.map((s,i) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const isOpen=flipped===i;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;button key={s.label} onClick={()=&gt;setFlipped(isOpen?null:i)}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>style={{ width:"100%", textAlign:"left",</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>background:isOpen?`${s.color}12`:`${P.cream}05`,</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>border:`1px solid ${isOpen?s.color+"44":P.cream+"0a"}`,</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>borderRadius:16, padding:"14px 16px", cursor:"pointer",</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>opacity:entered?1:0, transform:entered?"translateY(0)":"translateY(20px)",</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>transition:`all 0.5s cubic-bezier(0.34,1.56,0.64,1) ${i*0.1}s` }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div style={{ display:"flex", alignItems:"center", gap:12 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div style={{ width:38, height:38, borderRadius:10, background:`${s.color}18`,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>display:"flex", alignItems:"center", justifyContent:"center",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>fontSize:18, flexShrink:0 }}&gt;{s.icon}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div style={{ flex:1, minWidth:0 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div style={{ display:"flex", alignItems:"center", gap:8, flexWrap:"wrap" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;span style={{ fontSize:13, fontWeight:700, color:P.cream }}&gt;{s.label}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;Badge label={s.source} color={s.color}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;span style={{ fontSize:16, color:s.color, flexShrink:0,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>transform:isOpen?"rotate(45deg)":"rotate(0deg)",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>transition:"transform 0.3s cubic-bezier(0.34,1.56,0.64,1)" }}&gt;+&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{isOpen &amp;&amp; (</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div style={{ animation:"popIn 0.4s cubic-bezier(0.34,1.56,0.64,1)", marginTop:12, paddingLeft:50 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div style={{ fontSize:12, color:`${P.cream}bb`, lineHeight:1.6 }}&gt;{s.cost}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div style={{ fontSize:12, color:P.sageLight, lineHeight:1.55, marginTop:8,</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>paddingTop:8, borderTop:`1px solid ${P.cream}10`, fontStyle:"italic" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>💊 {s.antidote}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>})}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:11, color:`${P.cream}55`,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>textAlign:"center", marginTop:14, lineHeight:1.5, fontStyle:"italic",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>opacity:entered?1:0, transition:"opacity 0.6s ease 0.5s" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>Self-awareness isn't self-fixing.&lt;br/&gt;These are ongoing — name them when they show up.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/ScrollArea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;FloatingOrb size={70} color={P.coral} top="10%" left="80%" delay={0} duration={7}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/Screen&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const ConnectorScreen = ({ isActive }) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [entered, setEntered] = useState(false);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (isActive){const t=setTimeout(()=&gt;setEntered(true),300);return()=&gt;clearTimeout(t);}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setEntered(false);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}, [isActive]);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const cards = [</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ title:"The Earned Relationship", theme:"DISC S", color:P.tealLight,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text:"Travis doesn't charm his way into trust — he builds it through consistency over months and years. His loyalty runs deep and it expects something similar in return. Don't mistake his warmth for openness with everyone; his circle is smaller and more meaningful than it looks." },</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ title:"The Invisible Coach", theme:"FF 7 + Follow Thru 8", color:P.goldLight,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text:"He's noticing potential, gaps, and trajectory before a word has been said about it. When he offers feedback or asks a pointed question, it's not criticism — it's investment. He only coaches people he believes are worth it." },</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ title:"The 1:1 Guy", theme:"DISC S", color:P.sageLight,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text:"Group settings aren't where Travis does his best connecting. He thinks out loud best one-on-one, with time, without an audience. If the goal is the real Travis — the ideas, the honesty, the depth — get him off the main stage." },</p>
+<p class="p1"><span class="Apple-converted-space">  </span>];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;Screen isActive={isActive} bg={`linear-gradient(160deg,${P.navyLight} 0%,${P.teal}44 100%)`}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;ScrollArea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ padding:"40px 20px 12px", position:"relative", zIndex:10 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:11, letterSpacing:"0.2em",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>textTransform:"uppercase", color:P.goldLight, marginBottom:6 }}&gt;The Connector&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style={{ fontFamily:"'Playfair Display',Georgia,serif",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>fontSize:"clamp(24px,5.5vw,34px)", fontWeight:400, color:P.cream, lineHeight:1.15 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>He builds trust&lt;br/&gt;&lt;span style={{ color:P.tealLight, fontStyle:"italic" }}&gt;brick by brick&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:13, color:`${P.cream}aa`,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>marginTop:8, lineHeight:1.5, maxWidth:400 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Travis doesn't do surface-level. His relationships are few, deep, and dependable.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ padding:"8px 20px 16px", display:"flex", flexDirection:"column", gap:14 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{cards.map((c,i) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div key={c.title} style={{ background:`${c.color}0f`, border:`1px solid ${c.color}2a`,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>borderRadius:18, padding:"20px 18px",</p>
+<p class="p1"><span class="Apple-converted-space">              </span>opacity:entered?1:0, transform:entered?"translateY(0) scale(1)":"translateY(30px) scale(0.95)",</p>
+<p class="p1"><span class="Apple-converted-space">              </span>transition:`all 0.7s cubic-bezier(0.34,1.56,0.64,1) ${i*0.18}s` }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:9, flexWrap:"wrap" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span style={{ fontFamily:"'DM Sans',sans-serif", fontSize:14, fontWeight:700, color:P.cream }}&gt;{c.title}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;Badge label={c.theme} color={c.color}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:12, color:`${P.cream}aa`, lineHeight:1.65 }}&gt;{c.text}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/ScrollArea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Sparkle top="20%" left="80%" delay={0.5} size={8}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Sparkle top="60%" left="10%" delay={1.2} size={10}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/Screen&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const UserManualScreen = ({ isActive }) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [tab, setTab] = useState(0);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [entered, setEntered] = useState(false);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (isActive){const t=setTimeout(()=&gt;setEntered(true),300);return()=&gt;clearTimeout(t);}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setEntered(false);setTab(0);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}, [isActive]);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const tabs = [</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ label:"📋 Projects", dos:[</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Bring him the full picture early — context, constraints, and what's already been tried",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Define the outcome clearly and let him design the system to get there",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Give him a process problem to untangle; he'll create clarity no one else could",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Set realistic timelines — his Follow Thru 8 means he'll actually hold them",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>], donts:[</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Dump vague direction and expect him to run with it — he needs the right question first",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Change scope mid-execution without acknowledging the rework it creates",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>]},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ label:"🪞 Feedback", dos:[</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Be direct but unhurried — he processes deeply and responds better with a beat to think",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Lead with what's working before pivoting; he needs the full picture, not just the gap",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Connect feedback to outcomes and impact — the why matters as much as the what",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>], donts:[</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Vague positive feedback — 'great work' lands flat; he needs to know specifically what worked",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Deliver critical feedback in public or group settings — he'll hold it together but won't absorb it",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>]},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ label:"⚔️ Disagree", dos:[</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Come with data or clear reasoning — he's a Fact Finder; logic lands better than opinion",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Give him space to respond; the pause isn't ambivalence — it's processing",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Invite his perspective first; he often has the most considered view and shares it last",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>], donts:[</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Expect a quick public rebuttal — he doesn't perform disagreement; he thinks it through",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Mistake his agreeableness for alignment — he may have deep reservations he hasn't voiced yet",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>]},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ label:"📅 Meetings", dos:[</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Send pre-reads — a Fact Finder 7 will arrive having already done the homework",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Have a clear agenda and a defined outcome; he considers purposeless meetings an actual cost",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Build in space for thoughtful input — he won't fight for the floor but has valuable perspective",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>], donts:[</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Run status update meetings that could have been a Slack message",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Call on him on the spot for 'quick decisions' — he's most effective with time to think",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>]},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const cur = tabs[tab];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;Screen isActive={isActive} bg={`linear-gradient(160deg,${P.navy} 0%,${P.navyLight} 100%)`}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style={{ padding:"40px 20px 10px", position:"relative", zIndex:10 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:11, letterSpacing:"0.2em",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>textTransform:"uppercase", color:P.goldLight, marginBottom:6 }}&gt;The User Manual&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ fontFamily:"'Playfair Display',Georgia,serif",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>fontSize:"clamp(22px,5vw,32px)", fontWeight:400, color:P.cream, lineHeight:1.15 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>How to &lt;span style={{ color:P.goldLight, fontStyle:"italic" }}&gt;actually&lt;/span&gt; work with Travis</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style={{ display:"flex", gap:5, padding:"8px 20px 10px", overflowX:"auto",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>position:"relative", zIndex:10, flexShrink:0 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{tabs.map((t,i) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button key={i} onClick={()=&gt;setTab(i)}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>style={{ padding:"7px 12px", borderRadius:50,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>border:`1px solid ${i===tab?P.gold+"55":P.cream+"18"}`,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>background:i===tab?`${P.gold}1a`:"transparent",</p>
+<p class="p1"><span class="Apple-converted-space">              </span>color:i===tab?P.goldLight:`${P.cream}77`,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>fontFamily:"'DM Sans',sans-serif", fontSize:12, fontWeight:600,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>cursor:"pointer", whiteSpace:"nowrap", flexShrink:0,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>transition:"all 0.4s cubic-bezier(0.34,1.56,0.64,1)" }}&gt;{t.label}&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;ScrollArea style={{ padding:"0 20px" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div key={tab} style={{ background:`${P.cream}07`, borderRadius:18,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>border:`1px solid ${P.cream}12`, padding:"18px 16px", position:"relative", zIndex:10,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>animation:"popIn 0.4s cubic-bezier(0.34,1.56,0.64,1)" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style={{ marginBottom:14 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:13, fontWeight:700,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>color:P.sageLight, marginBottom:8, letterSpacing:"0.04em" }}&gt;✅ Do this&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{cur.dos.map((d,i) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div key={i} style={{ fontFamily:"'DM Sans',sans-serif", fontSize:12,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>color:`${P.cream}cc`, lineHeight:1.55, padding:"7px 0",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>borderBottom:i&lt;cur.dos.length-1?`1px solid ${P.cream}0a`:"none" }}&gt;{d}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:13, fontWeight:700,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>color:P.coral, marginBottom:8, letterSpacing:"0.04em" }}&gt;❌ Not this&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{cur.donts.map((d,i) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div key={i} style={{ fontFamily:"'DM Sans',sans-serif", fontSize:12,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>color:`${P.cream}99`, lineHeight:1.55, padding:"7px 0",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>borderBottom:i&lt;cur.donts.length-1?`1px solid ${P.cream}0a`:"none" }}&gt;{d}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/ScrollArea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/Screen&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const DecoderScreen = ({ isActive }) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [expanded, setExpanded] = useState(null);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [entered, setEntered] = useState(false);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (isActive){const t=setTimeout(()=&gt;setEntered(true),300);return()=&gt;clearTimeout(t);}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setEntered(false);setExpanded(null);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}, [isActive]);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const rows = [</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ behavior:"He goes quiet in a meeting",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>meaning:"He's processing — not checked out. Follow Thru 8 wants to understand the full system before speaking. His silence is active work.",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>response:"Give him space. Follow up 1:1 afterward — that's when the real thinking comes out." },</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ behavior:"He seems hesitant to start something",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>meaning:"Quick Start 2 is doing its job. He's not slow — he's preventing impulsive mistakes that cost everyone later.",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>response:"Share context and constraints upfront. The pause shortens significantly when he has the information he needs." },</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ behavior:"He asks a lot of clarifying questions",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>meaning:"Fact Finder 7 is gathering the complete picture. He's not skeptical — he's building the foundation for excellent work.",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>response:"Answer them fully. Cutting the questions short doesn't speed him up — it just reduces the quality of the output." },</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ behavior:"He seems to be carrying too much",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>meaning:"DISC S said yes when he wanted to say not yet. He absorbed requests to keep things smooth and is now quietly overloaded.",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>response:"Ask directly: 'What's his current load?' Then actually listen. He won't volunteer this unprompted." },</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ behavior:"He's unusually direct",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>meaning:"Something has built up past the threshold. DISC S has high capacity for patience — but when it runs out, it runs out.",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>response:"Take it seriously. He doesn't escalate lightly. This is signal, not noise." },</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{ behavior:"He redesigns a process that seemed fine",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>meaning:"Follow Thru 8 saw a structural inefficiency and couldn't leave it alone. He's not criticizing — he's improving.",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>response:"Let him. The output will be better and he'll own it completely." },</p>
+<p class="p1"><span class="Apple-converted-space">  </span>];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;Screen isActive={isActive} bg={`linear-gradient(160deg,${P.navyLight} 0%,${P.navy} 100%)`}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style={{ padding:"40px 20px 10px", position:"relative", zIndex:10, flexShrink:0 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:11, letterSpacing:"0.2em",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>textTransform:"uppercase", color:P.goldLight, marginBottom:6 }}&gt;The Decoder&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ fontFamily:"'Playfair Display',Georgia,serif",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>fontSize:"clamp(22px,5vw,32px)", fontWeight:400, color:P.cream, lineHeight:1.15 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>What it &lt;span style={{ color:P.blueLight, fontStyle:"italic" }}&gt;actually&lt;/span&gt; means</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:13, color:`${P.cream}aa`,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>marginTop:8, lineHeight:1.5, maxWidth:400 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>Tap any behavior to translate what's really going on — and how to respond.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;ScrollArea style={{ padding:"8px 20px 0" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{rows.map((r,i) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button key={i} onClick={()=&gt;setExpanded(expanded===i?null:i)}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>style={{ width:"100%", textAlign:"left",</p>
+<p class="p1"><span class="Apple-converted-space">              </span>background:expanded===i?`${P.cream}0b`:`${P.cream}04`,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>border:`1px solid ${expanded===i?P.blueLight+"33":P.cream+"0a"}`,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>borderRadius:14, padding:"12px 14px", marginBottom:7, cursor:"pointer",</p>
+<p class="p1"><span class="Apple-converted-space">              </span>opacity:entered?1:0, transform:entered?"translateY(0)":"translateY(15px)",</p>
+<p class="p1"><span class="Apple-converted-space">              </span>transition:`all 0.5s cubic-bezier(0.34,1.56,0.64,1) ${i*0.08}s` }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;span style={{ fontSize:12, fontWeight:600, color:P.cream, lineHeight:1.4, paddingRight:8 }}&gt;{r.behavior}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;span style={{ fontSize:16, color:P.goldLight,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>transform:expanded===i?"rotate(45deg)":"rotate(0deg)",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>transition:"transform 0.3s cubic-bezier(0.34,1.56,0.64,1)", flexShrink:0 }}&gt;+&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{expanded===i &amp;&amp; (</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div style={{ animation:"popIn 0.4s cubic-bezier(0.34,1.56,0.64,1)" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div style={{ fontSize:12, color:P.blueLight, marginTop:8, lineHeight:1.55 }}&gt;{r.meaning}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div style={{ fontSize:12, color:P.goldLight, marginTop:6, lineHeight:1.55, fontStyle:"italic" }}&gt;→ {r.response}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/ScrollArea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/Screen&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const CheatSheetScreen = ({ isActive }) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [entered, setEntered] = useState(false);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (isActive){const t=setTimeout(()=&gt;setEntered(true),300);return()=&gt;clearTimeout(t);}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setEntered(false);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}, [isActive]);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const energize = [</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Give him a complex, under-documented problem to untangle",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Ask him to build the system or process from scratch",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Provide full context and clear parameters upfront",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Trust him with long-horizon work that requires follow-through",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Have a real 1:1 conversation — no agenda, no performance",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Acknowledge specifically what his work enabled or prevented",</p>
+<p class="p1"><span class="Apple-converted-space">  </span>];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const frustrate = [</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Change direction without explaining the reasoning",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Give him a task with no context and expect him to fill in the blanks",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Call status-update meetings that could have been an email",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Pressure him to commit on the spot without information",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Flood him with urgent priorities simultaneously",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Ignore the detail work — that's where he puts the most care",</p>
+<p class="p1"><span class="Apple-converted-space">  </span>];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;Screen isActive={isActive} bg={`linear-gradient(160deg,${P.navy} 0%,${P.navyLight} 60%,${P.teal}33 100%)`}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style={{ padding:"40px 20px 10px", position:"relative", zIndex:10, flexShrink:0 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:11, letterSpacing:"0.2em",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>textTransform:"uppercase", color:P.goldLight, marginBottom:6 }}&gt;The Cheat Sheet&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ fontFamily:"'Playfair Display',Georgia,serif",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>fontSize:"clamp(22px,5vw,32px)", fontWeight:400, color:P.cream, lineHeight:1.15 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>Care &amp; feeding&lt;br/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;span style={{ fontSize:"0.6em", color:`${P.cream}77`, fontStyle:"italic" }}&gt;a quick-reference guide&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;ScrollArea style={{ padding:"8px 20px 0" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ display:"flex", flexDirection:"column", gap:14 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style={{ background:`${P.sage}12`, border:`1px solid ${P.sage}2a`, borderRadius:18, padding:"16px 14px",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity:entered?1:0, transform:entered?"translateX(0)":"translateX(-30px)",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition:"all 0.6s cubic-bezier(0.34,1.56,0.64,1)" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:13, fontWeight:700,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>color:P.sageLight, marginBottom:10 }}&gt;⚡ To energize Travis&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{energize.map((item,i) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div key={i} style={{ fontFamily:"'DM Sans',sans-serif", fontSize:12,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>color:`${P.cream}bb`, lineHeight:1.5, padding:"4px 0 4px 12px",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>borderLeft:`2px solid ${P.sage}44`, marginBottom:3 }}&gt;{item}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style={{ background:`${P.coral}0c`, border:`1px solid ${P.coral}2a`, borderRadius:18, padding:"16px 14px",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity:entered?1:0, transform:entered?"translateX(0)":"translateX(30px)",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition:"all 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.15s" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:13, fontWeight:700,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>color:P.coral, marginBottom:10 }}&gt;🚫 To frustrate Travis&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{frustrate.map((item,i) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div key={i} style={{ fontFamily:"'DM Sans',sans-serif", fontSize:12,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>color:`${P.cream}99`, lineHeight:1.5, padding:"4px 0 4px 12px",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>borderLeft:`2px solid ${P.coral}33`, marginBottom:3 }}&gt;{item}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/ScrollArea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Sparkle top="14%" left="82%" delay={0} size={10}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Sparkle top="50%" left="6%" delay={1} size={8}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/Screen&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const CloseScreen = ({ isActive, onRestart }) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [showText, setShowText] = useState(false);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [showBtn, setShowBtn] = useState(false);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (!isActive) return;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setShowText(false); setShowBtn(false);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const t1=setTimeout(()=&gt;setShowText(true),600);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const t2=setTimeout(()=&gt;setShowBtn(true),1400);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return()=&gt;{clearTimeout(t1);clearTimeout(t2);};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}, [isActive]);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;Screen isActive={isActive}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;FloatingOrb size={180} color={P.blueLight} top="-40px" left="-40px" delay={0} duration={8}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;FloatingOrb size={130} color={P.gold} top="50%" left="68%" delay={0.5} duration={7}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;FloatingOrb size={100} color={P.teal} top="68%" left="5%" delay={1} duration={9}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Sparkle top="18%" left="60%" delay={0} size={12}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Sparkle top="40%" left="22%" delay={1} size={8}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Sparkle top="72%" left="70%" delay={0.5} size={10}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Sparkle top="28%" left="78%" delay={1.5} size={7}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style={{ flex:1, display:"flex", flexDirection:"column", justifyContent:"center",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>alignItems:"center", padding:"32px 24px 80px", position:"relative", zIndex:10, textAlign:"center" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ fontFamily:"'Playfair Display',Georgia,serif",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>fontSize:"clamp(22px,5.5vw,36px)", fontWeight:400, color:P.cream, lineHeight:1.3,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>opacity:showText?1:0, transform:showText?"translateY(0)":"translateY(30px)",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>transition:"all 1s cubic-bezier(0.34,1.56,0.64,1)" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>Now you know how Travis is wired.&lt;br/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;span style={{ color:P.goldLight, fontStyle:"italic" }}&gt;Put that to work.&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:13, color:`${P.cream}88`,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>marginTop:20, lineHeight:1.7, maxWidth:320,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>opacity:showText?1:0, transition:"opacity 0.8s ease 0.4s" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>Give him the messy, undocumented process.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>The initiative no one has tracked properly.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>The team that needs a system and a steady hand.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;br/&gt;&lt;br/&gt;That's where he does his best work.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onClick={onRestart}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>style={{ marginTop:36, padding:"12px 28px",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background:`linear-gradient(135deg,${P.blueLight},${P.teal})`,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border:"none", borderRadius:50, color:P.white,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>fontFamily:"'DM Sans',sans-serif", fontSize:14, fontWeight:600, cursor:"pointer",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>boxShadow:`0 4px 20px ${P.blueLight}44`,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity:showBtn?1:0, transform:showBtn?"translateY(0)":"translateY(20px)",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition:"all 0.6s cubic-bezier(0.34,1.56,0.64,1)" }}&gt;↺ Restart&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/Screen&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">function App() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [screen, setScreen] = useState(0);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const TOTAL = 9;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const touchRef = useRef({ startX:0, startY:0, startTime:0, locked:null });</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const goTo = useCallback(s =&gt; { if (s&gt;=0&amp;&amp;s&lt;TOTAL) setScreen(s); }, []);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const h = e =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (e.key==="ArrowRight"||e.key==="ArrowDown") goTo(screen+1);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (e.key==="ArrowLeft"||e.key==="ArrowUp") goTo(screen-1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>window.addEventListener("keydown",h);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return ()=&gt;window.removeEventListener("keydown",h);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}, [screen, goTo]);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const onTouchStart = useCallback(e =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const t=e.touches[0];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>touchRef.current={ startX:t.clientX, startY:t.clientY, startTime:Date.now(), locked:null };</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},[]);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const onTouchMove = useCallback(e =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const t=e.touches[0];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const { startX, startY, locked } = touchRef.current;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const dx=t.clientX-startX, dy=t.clientY-startY;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (locked===null) touchRef.current.locked=Math.abs(dx)&gt;Math.abs(dy)?"h":"v";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (touchRef.current.locked==="h") e.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},[]);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const onTouchEnd = useCallback(e =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const t=e.changedTouches[0];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const { startX, startTime, locked } = touchRef.current;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const dx=t.clientX-startX, dt=Date.now()-startTime;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (locked==="h"&amp;&amp;Math.abs(dx)&gt;40&amp;&amp;dt&lt;500) { if(dx&lt;0)goTo(screen+1); else goTo(screen-1); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},[screen,goTo]);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>style={{ width:"100%", height:"100vh", position:"relative", overflow:"hidden",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>background:P.navy, fontFamily:"'DM Sans',sans-serif", touchAction:"none", userSelect:"none" }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;CoverScreen<span class="Apple-converted-space">      </span>isActive={screen===0} onStart={()=&gt;goTo(1)}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;KolbeScreen<span class="Apple-converted-space">      </span>isActive={screen===1}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;DiscScreen <span class="Apple-converted-space">      </span>isActive={screen===2}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;BlindSpotsScreen isActive={screen===3}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;ConnectorScreen<span class="Apple-converted-space">  </span>isActive={screen===4}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;UserManualScreen isActive={screen===5}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;DecoderScreen<span class="Apple-converted-space">    </span>isActive={screen===6}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;CheatSheetScreen isActive={screen===7}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;CloseScreen<span class="Apple-converted-space">      </span>isActive={screen===8} onRestart={()=&gt;goTo(0)}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style={{ position:"absolute", bottom:0, left:0, right:0, zIndex:30,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>background:`linear-gradient(transparent,${P.navy}cc 40%)`, paddingTop:20, paddingBottom:8 }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{screen&gt;0&amp;&amp;screen&lt;TOTAL-1&amp;&amp;(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style={{ fontFamily:"'DM Sans',sans-serif", fontSize:10, color:`${P.cream}44`,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>textAlign:"center", letterSpacing:"0.1em", marginBottom:4 }}&gt;← swipe to navigate →&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;ProgressDots current={screen} total={TOTAL} onNav={goTo}/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">ReactDOM.createRoot(document.getElementById('root')).render(&lt;App/&gt;);</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
