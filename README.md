@@ -1,4 +1,4 @@
-# Travis 101 — A Personal Operating Manual
+# Travis 101 — A Working with Me Guide
 
 **Live site:** https://tfrye.github.io/Travis-101
 
