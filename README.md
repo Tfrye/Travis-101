@@ -1,4 +1,4 @@
-# Travis 101 — A Working with Me Guide
+# Travis 101 — A Working with me Guide
 
 **Live site:** https://tfrye.github.io/Travis-101
 
