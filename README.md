@@ -1,6 +1,6 @@
 # Travis 101 — A Working with me Guide
 
-**Live site:** https://teefrye.github.io/Travis-101
+**Live site:** https://teefrye.github.io/Working-with-Travis-101/
 
 ---
 
